@@ -1,0 +1,57 @@
+template <typename T>
+class Stack
+{
+private:
+	T* _stack;
+	unsigned _size;
+public:
+	Stack()
+	{
+		_size = 0;
+		_stack = nullptr;
+	}
+	bool IsEmpty()
+	{
+		return _size == 0;
+	}
+	T Head()
+	{
+		return _stack[_size - 1];
+	}
+	void push(T st)
+	{
+		T* tmp = new T[_size + 1];
+		for (int i = 0; i < _size; i++) {
+			tmp[i] = _stack[i];
+		}
+		tmp[_size] = st;
+		delete[] _stack;
+		_stack = tmp;
+		tmp = nullptr;
+		_size++;
+	}
+	T pop()
+	{
+		if (_size == 0) {
+			T *p;
+			p = nullptr;
+			return (*p);
+		}
+		T st;
+		st = _stack[_size - 1];
+		T* tmp = new T[_size - 1];
+		for (int i = 0; i < _size - 1; i++) {
+			tmp[i] = _stack[i];
+		}
+		delete[] _stack;
+		_stack = tmp;
+		tmp = nullptr;
+		_size--;
+		return st;
+	}
+	~Stack()
+	{
+		if (_size > 0)
+			delete[] _stack;
+	}
+};
